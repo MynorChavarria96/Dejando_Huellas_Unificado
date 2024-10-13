@@ -1,0 +1,184 @@
+<div class="card-body px-md-5 px-lg-6">
+    <h3 class="card-title text-center">Registro de Mascota</h3>
+    <form id="regForm" action="/submit-form" method="post" enctype="multipart/form-data">
+      <div class="stepper">
+        <div class="step step-1 active">Mascota</div>
+        <div class="step step-2">Salud</div>
+        <div class="step step-3">Dieta</div>
+        <div class="step step-4">Vacunas</div>
+      </div>
+      <!-- Paso 1: Datos de la Mascota -->
+      <div class="step active" id="step-1">
+        <h4>Datos de la Mascota</h4>
+        <div class="row mb-3">
+          <div class="col-md-7">
+            <label for="nombre_mascota" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre_mascota" name="nombre_mascota" required>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <label for="raza" class="form-label">Raza</label>
+            <input type="text" class="form-control" id="raza" name="raza">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-3">
+            <label for="peso" class="form-label">Peso</label>
+            <input type="number" min="0.01" step="0.10" max="99999.99" class="form-control" id="peso" name="peso" required>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <label for="color" class="form-label">Color</label>
+            <input type="text" class="form-control" id="color" name="color">
+          </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-7">
+                
+                    <div class="row mb-3">
+                        <div class="col-md-5">
+                          <label for="especie" class="form-label">Especie</label>
+                          <select class="form-select" id="especie" name="especie_id" required>
+                            <option value="">Seleccione una especie</option>
+                            <option value="1">Perro</option>
+                            <option value="2">Gato</option>
+                            <option value="3">Ave</option>
+                            <option value="4">Reptil</option>
+                            <option value="5">Reptil</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-5">
+                          <label for="genero" class="form-label">Género</label>
+                          <select class="form-select" id="genero" name="genero">
+                            <option value="Macho">Macho</option>
+                            <option value="Hembra">Hembra</option>
+                          </select>
+                          
+                        </div>
+                        
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-12">
+                          <label for="formFile" class="form-label">Foto</label>
+                          <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" onchange="previewImage(event)">
+                          <img id="imgPreview" class="img-preview" alt="Vista previa de la imagen">
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-5 px-md-5 px-lg-6 ">
+                    <img src="" class="img-fluid rounded" alt="...">
+                </div>
+               
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente</button>
+        </div>
+    
+    
+      <!-- Paso 2: Información de Salud -->
+      <div class="step" id="step-2">
+        <h4>Información de Salud</h4>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="historial_medico" class="form-label">Historial Médico</label>
+            <textarea class="form-control" id="historial_medico" name="historial_medico" rows="3"></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="enfermedades_previas" class="form-label">Enfermedades Previas</label>
+            <textarea class="form-control" id="enfermedades_previas" name="enfermedades_previas" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="alergias" class="form-label">Alergias</label>
+            <textarea class="form-control" id="alergias" name="alergias" rows="3"></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="medicacion_actual" class="form-label">Medicación Actual</label>
+            <textarea class="form-control" id="medicacion_actual" name="medicacion_actual" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="esterilizacion" class="form-label">Esterilización</label>
+            <select class="form-select" id="esterilizacion" name="esterilizacion">
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="fecha_ultimo_chequeo" class="form-label">Fecha del Último Chequeo</label>
+            <input type="date" class="form-control" id="fecha_ultimo_chequeo" name="fecha_ultimo_chequeo">
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">Anterior</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente</button>
+      </div>
+      <!-- Paso 3: Dieta -->
+      <div class="step" id="step-3">
+        <h4>Dieta</h4>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="tipo_alimento" class="form-label">Tipo de Alimento</label>
+            <input type="text" class="form-control" id="tipo_alimento" name="tipo_alimento">
+          </div>
+          <div class="col-md-6">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="text" class="form-control" id="cantidad" name="cantidad">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="frecuencia" class="form-label">Frecuencia</label>
+            <input type="text" class="form-control" id="frecuencia" name="frecuencia">
+          </div>
+          <div class="col-md-6">
+            <label for="restricciones_dieteticas" class="form-label">Restricciones Dietéticas</label>
+            <textarea class="form-control" id="restricciones_dieteticas" name="restricciones_dieteticas" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="suplementos" class="form-label">Suplementos</label>
+          <textarea class="form-control" id="suplementos" name="suplementos" rows="3"></textarea>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">Anterior</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente</button>
+      </div>
+      <!-- Paso 4: Vacunas -->
+      <div class="step" id="step-4">
+        <h4>Vacunas</h4>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="medicamento_aplicado" class="form-label">Medicamento Aplicado</label>
+            <input type="text" class="form-control" id="medicamento_aplicado" name="medicamento_aplicado">
+          </div>
+          <div class="col-md-6">
+            <label for="dosis" class="form-label">Dosis</label>
+            <input type="text" class="form-control" id="dosis" name="dosis">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="zona_vacuna" class="form-label">Zona de Vacuna</label>
+            <input type="text" class="form-control" id="zona_vacuna" name="zona_vacuna">
+          </div>
+          <div class="col-md-6">
+            <label for="fecha_vacuna" class="form-label">Fecha de Vacuna</label>
+            <input type="date" class="form-control" id="fecha_vacuna" name="fecha_vacuna">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="fecha_proxima_vacuna" class="form-label">Fecha Próxima Vacuna</label>
+          <input type="date" class="form-control" id="fecha_proxima_vacuna" name="fecha_proxima_vacuna">
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">Anterior</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </div>
