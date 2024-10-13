@@ -7,21 +7,21 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('passport');
 const multer = require('multer');
-const { ensureAuthenticated } = require('./Frontend/middleware/auth');
+const { ensureAuthenticated } = require('./Front/middleware/auth');
 
 
 // Importar rutas
-const RegistroRoutes = require('./Backend/routes/registroRoutes');
-const reportRoutes = require('./Frontend/routes/reportRoutes');
-const userRoutes = require('./Frontend/routes/userRoutes');
-const mascotaRoutes = require('./Frontend/routes/mascotaRoutes');
+const RegistroRoutes = require('./Back/routes/registroRoutes');
+const reportRoutes = require('./Front/routes/reportRoutes');
+const userRoutes = require('./Front/routes/userRoutes');
+const mascotaRoutes = require('./Front/routes/mascotaRoutes');
 // Inicializar Express
 const app = express();
 const server = http.createServer(app);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './Frontend/uploads/');
+    cb(null, './Front/uploads/');
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -35,15 +35,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurar EJS como motor de vistas
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'Frontend', 'views'));
+app.set('views', path.join(__dirname, 'Front', 'views'));
 app.use(expressLayouts);
 
 // Configurar carpeta pública para los avatares
-app.use('/images', express.static(path.join(__dirname, 'Frontend', 'public', 'images')));
+app.use('/images', express.static(path.join(__dirname, 'Front', 'public', 'images')));
 
 // Configurar carpeta pública para otros archivos estáticos
-app.use('/public', express.static(path.join(__dirname, 'Frontend', 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'Frontend', 'uploads')));
+app.use('/public', express.static(path.join(__dirname, 'Front', 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'Front', 'uploads')));
 
 // Configurar sesión
 app.use(session({
@@ -53,7 +53,7 @@ app.use(session({
 }));
 
 // Inicializar Passport
-const initializePassport = require('./Frontend/passportConfig');
+const initializePassport = require('./Front/passportConfig');
 initializePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
