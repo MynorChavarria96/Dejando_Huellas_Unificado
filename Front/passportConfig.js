@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+//const fetch = require('node-fetch'); 
 const API_URL = process.env.API_URL || 'http://localhost:8080'; 
 function initialize(passport) {
   const authenticateUser = async (username, password, done) => {

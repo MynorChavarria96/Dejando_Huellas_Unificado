@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 const API_URL = process.env.API_URL || 'http://localhost:8080';
 exports.showRegister = (req, res) => {
   res.render('register', { layout: false, errors: [], success: req.session.success });
