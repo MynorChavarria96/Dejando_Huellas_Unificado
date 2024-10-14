@@ -1,5 +1,6 @@
 // controllers/mascotaController.js
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
+const fetch = (...args) => import('node-fetch').then(module => module.default(...args));
 
 const API_URL = process.env.API_URL || 'http://localhost:8080'; // Valor por defecto si no existe la variable
 
